@@ -53,6 +53,9 @@ public class Metric : MonoBehaviour
 
         if (_value == _maxValue) HideButton(_incrementButton, _maxText);
         else ShowButton(_incrementButton, _maxText);
+
+
+        OnValueChanged?.Invoke(this);
     }
 
     public bool HasEnoughPoints(int points)

@@ -23,10 +23,18 @@ public class MetricsInteractable : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (!_isDisplaying && _manager.CanDisplay())
+        if (_manager.CanDisplay())
         {
-            _manager.DisplayMetricsInteractable(this);
+            if (!_isDisplaying)
+            {
+                _manager.DisplayMetricsInteractable(this);
+            }
+            else
+            {
+                _manager.HideCurrentInteractableMetrics();
+            }
         }
+        
     }
 
 
