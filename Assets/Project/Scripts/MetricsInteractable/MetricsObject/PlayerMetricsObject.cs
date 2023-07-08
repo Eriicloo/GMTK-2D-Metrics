@@ -18,8 +18,6 @@ public class PlayerMetricsObject : MetricsObject
 
     public override void Init(MetricsInteractableManager metricsInteractableManager)
     {
-        Debug.Log("PLAYER");
-
         _movementSpeed.Init(metricsInteractableManager);
         _jump.Init(metricsInteractableManager);
 
