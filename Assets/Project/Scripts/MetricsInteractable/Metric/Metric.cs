@@ -25,6 +25,7 @@ public class Metric : MonoBehaviour
     [SerializeField] private Button _decrementButton;
     [SerializeField] private TextMeshProUGUI _minText;
     [SerializeField] private TextMeshProUGUI _maxText;
+    [SerializeField] private TextMeshProUGUI _spentPointsText;
 
 
     private MetricsInteractableManager _metricsInteractableManager;
@@ -39,6 +40,7 @@ public class Metric : MonoBehaviour
 
         _value = _defaultValue;
         UpdateValueText();
+        UpdateSpentPointsText();
 
 
         _nameText.text = _name;
@@ -102,6 +104,7 @@ public class Metric : MonoBehaviour
 
         ++_value;
         UpdateValueText();
+        UpdateSpentPointsText();
 
         if (!CanIncrement())
         {
@@ -132,6 +135,7 @@ public class Metric : MonoBehaviour
         
         --_value;
         UpdateValueText();
+        UpdateSpentPointsText();
 
         if (!CanDecrement())
         {
@@ -175,6 +179,39 @@ public class Metric : MonoBehaviour
 
         button.transform.DOPunchPosition(Vector3.right * 10.0f, duration);
         button.image.DOColor(Color.red, duration / 2).OnComplete(() => button.image.DOColor(Color.white, duration / 2));
+    }
+
+
+    private void UpdateSpentPointsText()
+    {
+        int difference = _value - _defaultValue;
+
+        if (difference == 0)
+        {
+            _valueText.color = Color.white;
+        }
+        else if (difference > 0)
+        {
+            _valueText.color = Color.green;
+        }
+        else if (difference < 0)
+        {
+            _valueText.color = Color.red;
+        }
+        
+        
+        if (difference == 0)
+        {
+            _spentPointsText.gameObject.SetActive(false);
+        }
+        else
+        {
+            _spentPointsText.gameObject.SetActive(true);
+
+            string prefix = difference > 0 ? "+" : "-";
+            difference = Mathf.Abs(difference);
+            _spentPointsText.text = "(" + prefix + difference.ToString() + ")";
+        }
     }
 
 }
