@@ -31,29 +31,41 @@ public class Metric : MonoBehaviour
     private MetricsInteractableManager _metricsInteractableManager;
 
     public Action<Metric> OnValueChanged;
-    
+
+
+    private void OnEnable()
+    {
+        MetricsInteractableManager.OnPointsReset += ResetValue;
+    }
+    private void OnDisable()
+    {
+        MetricsInteractableManager.OnPointsReset -= ResetValue;
+    }
 
 
     public void Init(MetricsInteractableManager metricsInteractableManager)
     {
         _metricsInteractableManager = metricsInteractableManager;
 
-        _value = _defaultValue;
-        UpdateValueText();
-        UpdateSpentPointsText();
-
-
         _nameText.text = _name;
         _incrementButton.onClick.AddListener(OnIncrementButtonPressed);
         _decrementButton.onClick.AddListener(OnDecrementButtonPressed);
 
+        ResetValue();
+    }
+
+    private void ResetValue()
+    {
+        _value = _defaultValue;
+
+        UpdateValueText();
+        UpdateSpentPointsText();
 
         if (_value == _minValue) HideButton(_decrementButton, _minText);
         else ShowButton(_decrementButton, _minText);
 
         if (_value == _maxValue) HideButton(_incrementButton, _maxText);
         else ShowButton(_incrementButton, _maxText);
-
 
         OnValueChanged?.Invoke(this);
     }
