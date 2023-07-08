@@ -19,7 +19,7 @@ public class MetricsInteractableManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _pointsText;
 
 
-    private void Awake()
+    private void Start()
     {
         foreach (var interactable in interactables)
         {

@@ -17,6 +17,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _speedMultiplier;
     [SerializeField] private InstructionType _firstInstruction;
 
+    [Header("METRICS")]
+    [SerializeField] private PlayerMetricsObject _playerMetrics;
+
+
     private int _jumpCoef = 3;
     private int _speed = 3;
     private int _health = 3;
@@ -26,6 +30,19 @@ public class PlayerController : MonoBehaviour
 
     private bool _run = false;
     private int _direction = 1;
+
+
+    private void OnEnable()
+    {
+        _playerMetrics._movementSpeed.OnValueChanged += OnMovementSpeedChanged;
+        _playerMetrics._jump.OnValueChanged += OnJumpChanged;
+    }
+    
+    private void OnDisable()
+    {
+        _playerMetrics._movementSpeed.OnValueChanged -= OnMovementSpeedChanged;
+        _playerMetrics._jump.OnValueChanged -= OnJumpChanged;
+    }
 
     public void SetJumpCoef(int jumpCoef)
     {
@@ -146,4 +163,17 @@ public class PlayerController : MonoBehaviour
     {
         //die animation
     }
+
+
+
+    private void OnMovementSpeedChanged(Metric metric)
+    {        
+        SetSpeedCoef(metric._value);
+    }
+
+    private void OnJumpChanged(Metric metric)
+    {
+        SetJumpCoef(metric._value);
+    }
+
 }
