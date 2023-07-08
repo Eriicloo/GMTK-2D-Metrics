@@ -15,7 +15,7 @@ public class MetricsInteractableManager : MonoBehaviour
 
     [Header("POINTS")]
     [SerializeField] private int _maxPoints = 3;
-    [SerializeField] private int _currentPoints;
+    [HideInInspector] private int _currentPoints;
     [SerializeField] private TextMeshProUGUI _pointsText;
 
 
