@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerMetricsObject _playerMetrics;
 
 
-    private int _jumpCoef = 3;
+    private float _jumpCoef = 3;
     private int _speed = 3;
     private int _health = 3;
     private int _maxHealth = 3;
@@ -46,7 +46,21 @@ public class PlayerController : MonoBehaviour
 
     public void SetJumpCoef(int jumpCoef)
     {
-        _jumpCoef = jumpCoef;
+        switch (jumpCoef)
+        {
+            case 0:
+                _jumpCoef = 0;
+                break;
+            case 1:
+                _jumpCoef = 2.3f;
+                break;
+            case 2:
+                _jumpCoef = 3.15f;
+                break;
+            case 3:
+                _jumpCoef = 3.7f;
+                break;
+        }
     }
 
     public void SetSpeedCoef(int speed)
