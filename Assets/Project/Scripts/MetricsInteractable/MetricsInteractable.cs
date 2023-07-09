@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,11 @@ public class MetricsInteractable : MonoBehaviour
     private bool _isDisplaying;
 
 
+
+    public Action OnMetricsDisplayClicked;
+
+
+
     public void Init(MetricsInteractableManager manager)
     {
         _manager = manager;
@@ -22,6 +28,7 @@ public class MetricsInteractable : MonoBehaviour
         _metricsObject.Init(manager);
 
         _spriteMaterial = _spriteRenderer.material;
+        SetDefaultOutline();
         ShowOutline();
     }
 
@@ -29,11 +36,18 @@ public class MetricsInteractable : MonoBehaviour
     {
         PlayLevelManager.OnPlayStart += HideOutline;
         PlayLevelManager.OnReset += ShowOutline;
+
+        _metricsObject.OnShow += SetSelectedOutline;
+        _metricsObject.OnHide += SetDefaultOutline;
+
     }
     private void OnDisable()
     {
         PlayLevelManager.OnPlayStart -= HideOutline;
         PlayLevelManager.OnReset -= ShowOutline;
+
+        _metricsObject.OnShow -= SetSelectedOutline;
+        _metricsObject.OnHide -= SetDefaultOutline;
     }
 
 
@@ -45,6 +59,8 @@ public class MetricsInteractable : MonoBehaviour
             if (!_isDisplaying)
             {
                 _manager.DisplayMetricsInteractable(this);
+
+                OnMetricsDisplayClicked?.Invoke();
             }
             else
             {
@@ -61,15 +77,15 @@ public class MetricsInteractable : MonoBehaviour
         _isDisplaying = true;
         _metricsObject.ShowMetrics();
 
-        SetOutlineColor(_manager._activeInteractableOutline);
+        //SetOutlineColor(_manager._activeInteractableOutline);
     }
 
     public void StopDisplaying()
     {
         _isDisplaying = false;
-        _metricsObject.HideMetrics();
+        _metricsObject.HideMetrics(true);
 
-        SetOutlineColor(_manager._defaultInteractableOutline);
+        //SetOutlineColor(_manager._defaultInteractableOutline);
     }
 
 
@@ -86,5 +102,14 @@ public class MetricsInteractable : MonoBehaviour
         _spriteMaterial.SetColor("_OutlineColor", color);
     }
 
+
+    private void SetSelectedOutline()
+    {
+        SetOutlineColor(_manager._activeInteractableOutline);
+    }
+    private void SetDefaultOutline()
+    {
+        SetOutlineColor(_manager._defaultInteractableOutline);
+    }
 
 }
