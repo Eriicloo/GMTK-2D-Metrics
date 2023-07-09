@@ -1,12 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro.EditorUtilities;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
