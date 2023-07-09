@@ -1,12 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro.EditorUtilities;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -35,6 +29,9 @@ public class PlayerController : MonoBehaviour
     private int _maxHealth = 3;
 
     private bool _playing;
+    
+    private float _fanForce;
+    private bool _inFan;
 
     private bool _run = false;
     private int _direction = 1;
@@ -118,6 +115,11 @@ public class PlayerController : MonoBehaviour
         _speed = speed;
     }
 
+    public void SetFanForce(int fanForce)
+    {
+        _fanForce = (float)fanForce;
+    }
+
     public void SetHealth(int health)
     {
         _health = health;
@@ -128,7 +130,17 @@ public class PlayerController : MonoBehaviour
     {
         if (_run)
         {
-            _rb.velocity = new Vector2((float)_speed * _speedMultiplier * _direction, _rb.velocity.y);
+            float totalForce = (float)_speed * _speedMultiplier * _direction;
+            if (_inFan)
+            {
+                totalForce += _fanForce * _speedMultiplier;
+            }
+            _rb.velocity = new Vector2(totalForce, _rb.velocity.y);
+        }
+
+        if (_inFan)
+        {
+            
         }
     }
 
