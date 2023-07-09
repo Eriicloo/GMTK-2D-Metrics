@@ -5,19 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public Animator playerAnimator;
+    public Animator enemyAnimator;
+
     private void Start()
     {
-        AudioManager.Instance.PlayMusic("MainMenu");
+        if (!AudioManager.Instance.isPlayingMainMenuMusic)
+        {
+            AudioManager.Instance.PlayMusic("MainMenu");
+        }
     }
     public void PlayGame()
     {
-
-
-    }
-
-    public void Options()
-    {
-
+        AudioManager.Instance.PlaySounds("PressButton");
+        SceneManager.LoadScene("LevelSelector");
     }
 
     public void Credits()

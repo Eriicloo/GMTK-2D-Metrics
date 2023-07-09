@@ -9,6 +9,8 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
 
     public Sound[] music, sounds;
+    [HideInInspector] public bool isPlayingMainMenuMusic;
+
     public AudioSource musicSource, soundsSource;
 
     private void Awake()
@@ -46,6 +48,7 @@ public class AudioManager : MonoBehaviour
 
         else
         {
+            isPlayingMainMenuMusic = name == "MainMenu";
             musicSource.clip = song.clip;
             musicSource.Play();
         }
