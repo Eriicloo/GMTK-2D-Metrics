@@ -110,6 +110,7 @@ public class PlayerController : MonoBehaviour
                 return 3.7f;
                 break;
         }
+        return 0;
     }
 
     public void SetSpeedCoef(int speed)
