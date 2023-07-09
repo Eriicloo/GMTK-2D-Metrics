@@ -13,6 +13,7 @@ public class LvlEnd : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            AudioManager.Instance.PlaySounds("Win");
 
             if (_levelCollectible._wasCollected)
             {

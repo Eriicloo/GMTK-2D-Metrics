@@ -26,6 +26,7 @@ public class Collectible : MonoBehaviour
     // Start is called before the first frame update
     void OnTriggerEnter2D()
     {
+        AudioManager.Instance.PlaySounds("Collectible");
         gameObject.SetActive(false);
         _wasCollected = true;
     }
