@@ -22,6 +22,7 @@ public class MetricsInteractableManager : MonoBehaviour
     [SerializeField] private int _maxPoints = 3;
     [HideInInspector] private int _currentPoints;
     [SerializeField] private TextMeshProUGUI _pointsText;
+    [SerializeField] private TextMeshProUGUI _maxPointsText;
     private Vector3 _pointsTextLocalPosition;
     [SerializeField] private Image _underlineImage;
     [SerializeField] public Color _defaultPointsColor = Color.white;
@@ -43,7 +44,7 @@ public class MetricsInteractableManager : MonoBehaviour
     public static Action OnPointsReset;
 
 
-    private void Start()
+    private void Awake()
     {
         foreach (var interactable in interactables)
         {
@@ -54,6 +55,9 @@ public class MetricsInteractableManager : MonoBehaviour
 
         _currentActiveInteractable = null;
         _activeInteractableBeforePlay = null;
+
+
+        _maxPointsText.text = "/" + _maxPoints.ToString();
 
         _currentPoints = _maxPoints;        
         UpdatePointsText();

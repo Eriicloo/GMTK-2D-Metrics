@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class PlayerMetricsObject : MetricsObject
+public class FanMetricsObject : MetricsObject
 {
     [Header("COMPONENTS")]
     [SerializeField] private TextMeshProUGUI _metricsTitleText;
@@ -12,30 +13,16 @@ public class PlayerMetricsObject : MetricsObject
 
     [Header("METRICS")]
     [SerializeField] private string _metricsTitle;
-    [SerializeField] public Metric _movementSpeed;
-    [SerializeField] public Metric _jump;
-
-
-    bool _alreadyInit = false;
-
-
+    [SerializeField] public Metric _fanForce;
+    
     public override void Init(MetricsInteractableManager metricsInteractableManager)
     {
-        if (_alreadyInit) return;
-
-        _movementSpeed.Init(metricsInteractableManager);
-        _jump.Init(metricsInteractableManager);
+        _fanForce.Init(metricsInteractableManager);
 
 
         _metricsTitleText.text = _metricsTitle;
         _closeButton.onClick.AddListener(metricsInteractableManager.HideCurrentInteractableMetrics);
 
-        HideMetrics(false);
-
-        _alreadyInit = true;
+        HideMetrics();
     }
-
-
-
-
 }
