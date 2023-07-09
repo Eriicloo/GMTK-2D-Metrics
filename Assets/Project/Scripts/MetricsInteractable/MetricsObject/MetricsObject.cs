@@ -19,7 +19,7 @@ public abstract class MetricsObject : MonoBehaviour
 
         OnShow?.Invoke();
     }
-    public void HideMetrics(bool invokeEvent)
+    public void HideMetrics(bool invokeEvent = false)
     {
         _metricsHUD.SetActive(false);
 
