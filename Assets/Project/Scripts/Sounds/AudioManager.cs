@@ -9,7 +9,9 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
 
     public Sound[] music, sounds;
+
     [HideInInspector] public bool isPlayingMainMenuMusic;
+    [HideInInspector] public bool isPlayingLevelsMusic;
 
     public AudioSource musicSource, soundsSource;
 

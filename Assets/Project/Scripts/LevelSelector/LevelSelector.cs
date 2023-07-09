@@ -11,6 +11,13 @@ public class LevelSelector : MonoBehaviour
     [SerializeField] private Transform _buttonsHolder;
     private LevelButton[] _levelButtons;
 
+    private void Start()
+    {
+        if (!AudioManager.Instance.isPlayingMainMenuMusic)
+        {
+            AudioManager.Instance.PlayMusic("MainMenu");
+        }
+    }
 
     private void Awake()
     {
@@ -90,6 +97,11 @@ public class LevelSelector : MonoBehaviour
     {
         PlayerPrefsManager.Instance.SetCurrentLevelNumber(levelButton.LevelNumber);
         SceneManager.LoadScene("Level" + levelButton.LevelNumber.ToString());
+        
+        if (!AudioManager.Instance.isPlayingLevelsMusic)
+        {
+            AudioManager.Instance.PlayMusic("LevelsMusic");
+        }
     }
 
 
