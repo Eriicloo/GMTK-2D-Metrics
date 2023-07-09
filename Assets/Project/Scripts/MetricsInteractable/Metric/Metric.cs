@@ -32,6 +32,12 @@ public class Metric : MonoBehaviour
 
     public Action<Metric> OnValueChanged;
 
+    private IEnumerator Start()
+    {
+        yield return null;
+        OnValueChanged?.Invoke(this);
+    }
+
 
     private void OnEnable()
     {
