@@ -7,6 +7,8 @@ public class LvlEnd : MonoBehaviour
 {
     [SerializeField] private Collectible _levelCollectible;
     [SerializeField] private bool _isLastLevel;
+    
+    public Animator animator;
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -14,6 +16,7 @@ public class LvlEnd : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             AudioManager.Instance.PlaySounds("Win");
+            animator.SetBool("IsActive", true);
 
             if (_levelCollectible._wasCollected)
             {
@@ -34,8 +37,10 @@ public class LvlEnd : MonoBehaviour
         }
 
     }
-
-
+    private void setEndAnimation()
+    {
+        animator.SetBool("IsActive", false);
+    }
 
 
 }
