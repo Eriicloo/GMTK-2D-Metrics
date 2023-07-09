@@ -5,15 +5,28 @@ using UnityEngine.SceneManagement;
 
 public class LvlEnd : MonoBehaviour
 {
-   void OnTriggerEnter2D()
-   {
-      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-      
-      if (SceneManager.GetActiveScene().buildIndex >= PlayerPrefs.GetInt("ReachedIndex"))
-      {
-         PlayerPrefs.SetInt("ReachedIndex",SceneManager.GetActiveScene().buildIndex+1);
-         PlayerPrefs.SetInt("UnlockedLevels",PlayerPrefs.GetInt("UnlockedLevels")+1);
-         PlayerPrefs.Save();
-      }
-   }
+    [SerializeField] private Collectible _levelCollectible;
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+
+            if (_levelCollectible._wasCollected)
+            {
+                PlayerPrefsManager.Instance.SaveGemForCurrentLevel();
+            }
+
+            PlayerPrefsManager.Instance.UpdateUnlockedLevels();
+
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
+    }
+
+
+
+
 }
