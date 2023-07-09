@@ -10,17 +10,15 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        AudioManager.Instance.PlayMusic("MainMenu");
+        if (!AudioManager.Instance.isPlayingMainMenuMusic)
+        {
+            AudioManager.Instance.PlayMusic("MainMenu");
+        }
     }
     public void PlayGame()
     {
         AudioManager.Instance.PlaySounds("PressButton");
         SceneManager.LoadScene("LevelSelector");
-    }
-
-    public void Options()
-    {
-
     }
 
     public void Credits()

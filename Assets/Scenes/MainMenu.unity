@@ -2139,7 +2139,14 @@ MonoBehaviour:
     pitch: 0.1
     loop: 1
     source: {fileID: 0}
-  sounds: []
+  sounds:
+  - name: PressButton
+    clip: {fileID: 8300000, guid: 3372182d6b9e910499f33936efe7e34f, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  isPlayingMainMenuMusic: 0
   musicSource: {fileID: 794225675}
   soundsSource: {fileID: 0}
 --- !u!4 &1944958136
