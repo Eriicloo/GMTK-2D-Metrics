@@ -28,6 +28,15 @@ public class PlayLevelManager : MonoBehaviour
         HideButton(_resetButton, _runningText, true);        
     }
 
+    private void OnEnable()
+    {
+        PlayerController.OnPlayerKilled += OnResetButtonPressed;
+    }
+
+    private void OnDisable()
+    {
+        PlayerController.OnPlayerKilled -= OnResetButtonPressed;
+    }
 
     private void OnPlayButtonPressed()
     {
@@ -40,6 +49,7 @@ public class PlayLevelManager : MonoBehaviour
 
     private void OnResetButtonPressed()
     {
+        Debug.Log("RESET");
         OnReset?.Invoke();
 
         _resetButton.ClickedPunch();
