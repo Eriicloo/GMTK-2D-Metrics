@@ -16,8 +16,13 @@ public class PlayerMetricsObject : MetricsObject
     [SerializeField] public Metric _jump;
 
 
+    bool _alreadyInit = false;
+
+
     public override void Init(MetricsInteractableManager metricsInteractableManager)
     {
+        if (_alreadyInit) return;
+
         _movementSpeed.Init(metricsInteractableManager);
         _jump.Init(metricsInteractableManager);
 
@@ -25,7 +30,9 @@ public class PlayerMetricsObject : MetricsObject
         _metricsTitleText.text = _metricsTitle;
         _closeButton.onClick.AddListener(metricsInteractableManager.HideCurrentInteractableMetrics);
 
-        HideMetrics();
+        HideMetrics(false);
+
+        _alreadyInit = true;
     }
 
 
