@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class LvlEnd : MonoBehaviour
 {
     [SerializeField] private Collectible _levelCollectible;
+    [SerializeField] private bool _isLastLevel;
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -20,8 +21,15 @@ public class LvlEnd : MonoBehaviour
 
             PlayerPrefsManager.Instance.UpdateUnlockedLevels();
 
+            if (_isLastLevel)
+            {
+                SceneManager.LoadScene(0);
+            }
+            else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
     }
