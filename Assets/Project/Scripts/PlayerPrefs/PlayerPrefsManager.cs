@@ -65,9 +65,9 @@ public class PlayerPrefsManager : MonoBehaviour
     public void UpdateUnlockedLevels()
     {
         int lastUnlockedLevel = GetLastUnlockedLevel();
-        if (lastUnlockedLevel == _currentLevelNumber)
+        if (lastUnlockedLevel <= _currentLevelNumber)
         {
-            PlayerPrefs.SetInt(UNLOCKED_LEVELS, lastUnlockedLevel + 1);
+            PlayerPrefs.SetInt(UNLOCKED_LEVELS, _currentLevelNumber + 1);
             PlayerPrefs.Save();
         }
     }
