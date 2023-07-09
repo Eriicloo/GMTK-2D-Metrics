@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MetricsInteractableManager : MonoBehaviour
@@ -15,6 +16,7 @@ public class MetricsInteractableManager : MonoBehaviour
     [SerializeField] public Color _activeInteractableOutline = Color.yellow;
 
     private MetricsInteractable _currentActiveInteractable;
+    private MetricsInteractable _activeInteractableBeforePlay;
 
     [Header("POINTS")]
     [SerializeField] private int _maxPoints = 3;
@@ -29,7 +31,14 @@ public class MetricsInteractableManager : MonoBehaviour
     [Header("BUTTONS")]
     [SerializeField] private SmartButton _resetPointsButton;
 
+    [Header("OPTIONS MENU")]
+    [SerializeField] private GameObject _optionsCanvas;
+    [SerializeField] private SmartButton _closeButton;
+    [SerializeField] private Button _confirmCloseButton;
+    [SerializeField] private Button _backToGameButton;
+
     private bool _isInEditMode;
+    private bool _isInSubMenu;
 
     public static Action OnPointsReset;
 
@@ -41,7 +50,10 @@ public class MetricsInteractableManager : MonoBehaviour
             interactable.Init(this);                      
         }
 
+        _isInSubMenu = false;
+
         _currentActiveInteractable = null;
+        _activeInteractableBeforePlay = null;
 
         _currentPoints = _maxPoints;        
         UpdatePointsText();
@@ -53,6 +65,13 @@ public class MetricsInteractableManager : MonoBehaviour
         EnableMetricsEditMode();
 
         _resetPointsButton._button.onClick.AddListener(OnResetPointsButtonPressed);
+
+
+        _closeButton._button.onClick.AddListener(OnCloseButtonClicked);
+        _confirmCloseButton.onClick.AddListener(OnConfirmCloseButtonClicked);
+        _backToGameButton.onClick.AddListener(OnBackToGameButtonClicked);
+
+        HideOptionsCanvas();
     }
 
     private void OnEnable()
@@ -69,13 +88,19 @@ public class MetricsInteractableManager : MonoBehaviour
 
     public bool CanDisplay()
     {
-        return _isInEditMode;
+        return _isInEditMode && !_isInSubMenu;
     }
 
     private void EnableMetricsEditMode()
     {
         _isInEditMode = true;
         _resetPointsButton.Hide();
+
+        if (_activeInteractableBeforePlay != null)
+        {            
+            DisplayMetricsInteractable(_activeInteractableBeforePlay);
+            _activeInteractableBeforePlay = null;
+        }
 
         PointsTextFloatUp();
     }
@@ -90,6 +115,8 @@ public class MetricsInteractableManager : MonoBehaviour
 
         if (_currentActiveInteractable != null)
         {
+            _activeInteractableBeforePlay = _currentActiveInteractable;
+
             HideCurrentInteractableMetrics();
         }
 
@@ -112,6 +139,7 @@ public class MetricsInteractableManager : MonoBehaviour
     public void HideCurrentInteractableMetrics()
     {
         _currentActiveInteractable.StopDisplaying();
+        _currentActiveInteractable = null;
     }
 
 
@@ -275,5 +303,38 @@ public class MetricsInteractableManager : MonoBehaviour
         _pointsText.rectTransform.DOKill(false);
         _pointsText.rectTransform.localPosition = _pointsTextLocalPosition;
     }
+
+
+    private void OnCloseButtonClicked()
+    {
+        ShowOptionsCanvas();
+
+        _closeButton.ClickedPunch();
+
+        _isInSubMenu = true;
+    }
+    private void OnBackToGameButtonClicked()
+    {
+        HideOptionsCanvas();
+
+        _isInSubMenu = false;
+    }
+    private void OnConfirmCloseButtonClicked()
+    {
+        SceneManager.LoadScene("MainMenu");
+
+        _isInSubMenu = false;
+    }
+
+
+    private void ShowOptionsCanvas()
+    {
+        _optionsCanvas.SetActive(true);
+    }
+    private void HideOptionsCanvas()
+    {
+        _optionsCanvas.SetActive(false);
+    }
+
 
 }
