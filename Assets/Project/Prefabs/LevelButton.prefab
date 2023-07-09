@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '?'
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e183ef1edcc3fd149b345ed0be15f8c5, type: 2}
   m_sharedMaterial: {fileID: -3915171184159682702, guid: e183ef1edcc3fd149b345ed0be15f8c5, type: 2}
@@ -299,6 +299,7 @@ GameObject:
   - component: {fileID: 6650738770082535881}
   - component: {fileID: 6871936260614886007}
   - component: {fileID: 6124198622388102085}
+  - component: {fileID: 7175137202391823042}
   m_Layer: 5
   m_Name: LevelButton
   m_TagString: Untagged
@@ -412,6 +413,24 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7175137202391823042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5441001779833487341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc6781f731c8530468d7e7ffc7dd5a34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 6124198622388102085}
+  _locked: {fileID: 5763030562903234802}
+  _gemHolder: {fileID: 4769114632607144514}
+  _gem: {fileID: 3090207573517923841}
+  _levelNumberText: {fileID: 908492181576806531}
+  _levelNumber: 1
 --- !u!1 &5763030562903234802
 GameObject:
   m_ObjectHideFlags: 0
