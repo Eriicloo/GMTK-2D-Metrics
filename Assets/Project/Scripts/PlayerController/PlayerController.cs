@@ -209,9 +209,10 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator FakeCoyoteJump(float jumpCoef)
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
         if (IsGrounded())
         {
+            _rb.velocity = new Vector2(_rb.velocity.x, 0);
             _rb.AddForce(new Vector2(0, jumpCoef * _jumpMultiplier), ForceMode2D.Impulse);
         }
     }
@@ -219,7 +220,7 @@ public class PlayerController : MonoBehaviour
     public void TrampolineJump(int trampolineCoef)
     {
         _trampJumpCoef = JumpCoefMapping(trampolineCoef);
-        Jump(_trampJumpCoef);
+        _rb.AddForce(new Vector2(0, _trampJumpCoef * _jumpMultiplier), ForceMode2D.Impulse);
         //_rb.AddForce(new Vector2(0, GameStats.trampolineJumpCoef * _jumpMultiplier), ForceMode2D.Impulse);
     }
 
