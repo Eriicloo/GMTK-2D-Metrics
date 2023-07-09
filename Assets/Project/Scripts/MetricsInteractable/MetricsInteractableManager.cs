@@ -1,10 +1,11 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
+using UnityEngine.UI;
 
 public class MetricsInteractableManager : MonoBehaviour
 {
@@ -18,8 +19,14 @@ public class MetricsInteractableManager : MonoBehaviour
     [HideInInspector] private int _currentPoints;
     [SerializeField] private TextMeshProUGUI _pointsText;
 
+    [Header("BUTTONS")]
+    [SerializeField] private SmartButton _resetPointsButton;
 
-    private void Awake()
+
+    public static Action OnPointsReset;
+
+
+    private void Start()
     {
         foreach (var interactable in interactables)
         {
@@ -30,6 +37,10 @@ public class MetricsInteractableManager : MonoBehaviour
 
         _currentPoints = _maxPoints;
         UpdatePointsText();
+
+
+        _resetPointsButton._button.onClick.AddListener(OnResetPointsButtonPressed);
+
     }
 
 
@@ -139,6 +150,15 @@ public class MetricsInteractableManager : MonoBehaviour
     private void UpdatePointsText()
     {
         _pointsText.text = _currentPoints.ToString();
+
+        if (_currentPoints == _maxPoints)
+        {
+            _resetPointsButton.Hide();
+        }
+        else
+        {
+            _resetPointsButton.Show();
+        }
     }
 
     private void PointsGainedAnimation()
@@ -168,10 +188,24 @@ public class MetricsInteractableManager : MonoBehaviour
         _pointsText.transform.DOComplete();
 
         float duration = 0.5f;
-
+        
         _pointsText.transform.DOPunchPosition(Vector3.left * 10.0f, duration);
         _pointsText.DOColor(Color.red, duration).OnComplete(()=> _pointsText.DOColor(Color.white, duration));
     }
 
+
+
+    private void OnResetPointsButtonPressed()
+    {
+        OnPointsReset?.Invoke();
+
+        _currentPoints = _maxPoints;
+        UpdatePointsText();
+
+        _resetPointsButton.ClickedPunch();
+
+        _resetPointsButton.transform.rotation = Quaternion.identity;
+        _resetPointsButton.transform.DORotate(transform.rotation.eulerAngles + (Vector3.forward * -180.0f), 0.4f);
+    }
 
 }

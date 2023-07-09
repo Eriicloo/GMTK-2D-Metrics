@@ -12,14 +12,12 @@ public class PlayerMetricsObject : MetricsObject
 
     [Header("METRICS")]
     [SerializeField] private string _metricsTitle;
-    [SerializeField] private Metric _movementSpeed;
-    [SerializeField] private Metric _jump;
+    [SerializeField] public Metric _movementSpeed;
+    [SerializeField] public Metric _jump;
 
 
     public override void Init(MetricsInteractableManager metricsInteractableManager)
     {
-        Debug.Log("PLAYER");
-
         _movementSpeed.Init(metricsInteractableManager);
         _jump.Init(metricsInteractableManager);
 
