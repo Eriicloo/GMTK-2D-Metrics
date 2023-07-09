@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -9,12 +10,29 @@ public class Collectible : MonoBehaviour
 
     private void Awake()
     {
-        _wasCollected = true;
+        _wasCollected = false;
+    }
+
+    private void OnEnable()
+    {
+        PlayLevelManager.OnReset += ResetCollectible;
+    }
+
+    private void OnDisable()
+    {
+        PlayLevelManager.OnReset -= ResetCollectible;
     }
 
     // Start is called before the first frame update
     void OnTriggerEnter2D()
     {
         gameObject.SetActive(false);
+        _wasCollected = true;
+    }
+
+    void ResetCollectible()
+    {
+        gameObject.SetActive(true);
+        _wasCollected = false;
     }
 }
