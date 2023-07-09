@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerMetricsObject _playerMetrics;
 
     private float _jumpCoef = 3;
+    private float _trampJumpCoef = 3;
     private int _speed = 3;
     private int _health = 3;
     private int _maxHealth = 3;
@@ -89,21 +90,27 @@ public class PlayerController : MonoBehaviour
 
     public void SetJumpCoef(int jumpCoef)
     {
+        _jumpCoef = JumpCoefMapping(jumpCoef);
+    }
+
+    private float JumpCoefMapping(int jumpCoef)
+    {
         switch (jumpCoef)
         {
             case 0:
-                _jumpCoef = 0;
+                return 0;
                 break;
             case 1:
-                _jumpCoef = 2.3f;
+                return 2.3f;
                 break;
             case 2:
-                _jumpCoef = 3.15f;
+                return 3.15f;
                 break;
             case 3:
-                _jumpCoef = 3.7f;
+                return 3.7f;
                 break;
         }
+        return 0;
     }
 
     public void SetSpeedCoef(int speed)
@@ -155,10 +162,10 @@ public class PlayerController : MonoBehaviour
                 Run(-1);
                 break;
             case InstructionType.JUMP:
-                Jump();
+                Jump(_jumpCoef);
                 break;
             case InstructionType.TRAMPOLINE:
-                TrampolineJump();
+                //TrampolineJump();
                 break;
         }
     }
@@ -176,29 +183,31 @@ public class PlayerController : MonoBehaviour
         _run = false;
     }
     
-    private void Jump()
+    private void Jump(float jumpCoef)
     {
         //jump animation
         if (!IsGrounded())
         {
-            StartCoroutine(FakeCoyoteJump());
+            StartCoroutine(FakeCoyoteJump(jumpCoef));
         } else
         {
-            _rb.AddForce(new Vector2(0, _jumpCoef * _jumpMultiplier), ForceMode2D.Impulse);
+            _rb.AddForce(new Vector2(0, jumpCoef * _jumpMultiplier), ForceMode2D.Impulse);
         }
     }
 
-    private IEnumerator FakeCoyoteJump()
+    private IEnumerator FakeCoyoteJump(float jumpCoef)
     {
         yield return new WaitForSeconds(0.2f);
         if (IsGrounded())
         {
-            _rb.AddForce(new Vector2(0, _jumpCoef * _jumpMultiplier), ForceMode2D.Impulse);
+            _rb.AddForce(new Vector2(0, jumpCoef * _jumpMultiplier), ForceMode2D.Impulse);
         }
     }
 
-    private void TrampolineJump()
+    public void TrampolineJump(int trampolineCoef)
     {
+        _trampJumpCoef = JumpCoefMapping(trampolineCoef);
+        Jump(_trampJumpCoef);
         //_rb.AddForce(new Vector2(0, GameStats.trampolineJumpCoef * _jumpMultiplier), ForceMode2D.Impulse);
     }
 
