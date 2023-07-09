@@ -316,9 +316,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3743442274496303607, guid: 96cc23a00c7cd9142ac38e0014783e58, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6863369389291279327, guid: 96cc23a00c7cd9142ac38e0014783e58, type: 3}
       propertyPath: music.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6863369389291279327, guid: 96cc23a00c7cd9142ac38e0014783e58, type: 3}
       propertyPath: music.Array.data[0].clip
@@ -327,6 +331,14 @@ PrefabInstance:
     - target: {fileID: 6863369389291279327, guid: 96cc23a00c7cd9142ac38e0014783e58, type: 3}
       propertyPath: music.Array.data[0].name
       value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863369389291279327, guid: 96cc23a00c7cd9142ac38e0014783e58, type: 3}
+      propertyPath: music.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0cd673da275b0ea499d18f3f4bd60e48, type: 3}
+    - target: {fileID: 6863369389291279327, guid: 96cc23a00c7cd9142ac38e0014783e58, type: 3}
+      propertyPath: music.Array.data[1].name
+      value: LevelsMusic
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
