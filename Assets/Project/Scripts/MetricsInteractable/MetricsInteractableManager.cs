@@ -11,6 +11,8 @@ public class MetricsInteractableManager : MonoBehaviour
 {
     [Header("INTERACTABLES")]
     [SerializeField] private MetricsInteractable[] interactables;
+    [SerializeField] public Color _defaultInteractableOutline = Color.cyan;
+    [SerializeField] public Color _activeInteractableOutline = Color.yellow;
 
     private MetricsInteractable _currentActiveInteractable;
 
@@ -18,10 +20,16 @@ public class MetricsInteractableManager : MonoBehaviour
     [SerializeField] private int _maxPoints = 3;
     [HideInInspector] private int _currentPoints;
     [SerializeField] private TextMeshProUGUI _pointsText;
+    private Vector3 _pointsTextLocalPosition;
+    [SerializeField] private Image _underlineImage;
+    [SerializeField] public Color _defaultPointsColor = Color.white;
+    [SerializeField] public Color _pointsGainedColor = Color.green;
+    [SerializeField] public Color _notEnoughPointsColor = Color.red;
 
     [Header("BUTTONS")]
     [SerializeField] private SmartButton _resetPointsButton;
 
+    private bool _isInEditMode;
 
     public static Action OnPointsReset;
 
@@ -30,23 +38,62 @@ public class MetricsInteractableManager : MonoBehaviour
     {
         foreach (var interactable in interactables)
         {
-            interactable.Init(this);
+            interactable.Init(this);                      
         }
 
         _currentActiveInteractable = null;
 
-        _currentPoints = _maxPoints;
+        _currentPoints = _maxPoints;        
         UpdatePointsText();
+        _pointsText.color = _defaultPointsColor;
+        _underlineImage.color = _defaultInteractableOutline;
 
+        _pointsTextLocalPosition = _pointsText.rectTransform.localPosition;
+
+        EnableMetricsEditMode();
 
         _resetPointsButton._button.onClick.AddListener(OnResetPointsButtonPressed);
+    }
 
+    private void OnEnable()
+    {
+        PlayLevelManager.OnPlayStart += DisableMetricsEditMode;
+        PlayLevelManager.OnReset += EnableMetricsEditMode;
+    }
+    private void OnDisable()
+    {
+        PlayLevelManager.OnPlayStart -= DisableMetricsEditMode;
+        PlayLevelManager.OnReset -= EnableMetricsEditMode;
     }
 
 
     public bool CanDisplay()
     {
-        return true;
+        return _isInEditMode;
+    }
+
+    private void EnableMetricsEditMode()
+    {
+        _isInEditMode = true;
+        _resetPointsButton.Hide();
+
+        PointsTextFloatUp();
+    }
+    private void DisableMetricsEditMode()
+    {
+        _isInEditMode = false;
+
+        if (_currentPoints != _maxPoints)
+        {
+            _resetPointsButton.Show();
+        }        
+
+        if (_currentActiveInteractable != null)
+        {
+            HideCurrentInteractableMetrics();
+        }
+
+        PointstextStopFloat();
     }
 
 
@@ -169,7 +216,7 @@ public class MetricsInteractableManager : MonoBehaviour
         float duration = 0.5f;
 
         _pointsText.transform.DOPunchScale(Vector3.one * 0.2f, duration, 3);
-        _pointsText.DOColor(Color.green, duration).OnComplete(() => _pointsText.DOColor(Color.white, duration));
+        _pointsText.DOColor(_pointsGainedColor, duration).OnComplete(() => _pointsText.DOColor(_defaultPointsColor, duration));
     }
 
     private void PointsSpentAnimation()
@@ -190,7 +237,7 @@ public class MetricsInteractableManager : MonoBehaviour
         float duration = 0.5f;
         
         _pointsText.transform.DOPunchPosition(Vector3.left * 10.0f, duration);
-        _pointsText.DOColor(Color.red, duration).OnComplete(()=> _pointsText.DOColor(Color.white, duration));
+        _pointsText.DOColor(_notEnoughPointsColor, duration).OnComplete(()=> _pointsText.DOColor(_defaultPointsColor, duration));
     }
 
 
@@ -206,6 +253,27 @@ public class MetricsInteractableManager : MonoBehaviour
 
         _resetPointsButton.transform.rotation = Quaternion.identity;
         _resetPointsButton.transform.DORotate(transform.rotation.eulerAngles + (Vector3.forward * -180.0f), 0.4f);
+    }
+
+
+    private void PointsTextFloatUp()
+    {
+        _pointsText.rectTransform.DOScale(Vector3.one * 1.2f, 1.5f);
+        _pointsText.rectTransform.DOBlendableMoveBy(Vector3.up * 7f, 1.5f)
+            .OnComplete(() => { PointsTextFloatDown(); });
+    }
+
+    private void PointsTextFloatDown()
+    {
+        _pointsText.rectTransform.DOScale(Vector3.one, 1.5f);
+        _pointsText.rectTransform.DOBlendableMoveBy(Vector3.down * 7f, 1.5f)
+            .OnComplete(() => { PointsTextFloatUp(); });
+    }
+
+    private void PointstextStopFloat()
+    {
+        _pointsText.rectTransform.DOKill(false);
+        _pointsText.rectTransform.localPosition = _pointsTextLocalPosition;
     }
 
 }
