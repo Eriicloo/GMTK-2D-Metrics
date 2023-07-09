@@ -57,6 +57,7 @@ public class SmartButton : MonoBehaviour
         wasClicked = true;
         _button.enabled = false;
 
+        _button.transform.DOComplete();
         _button.transform.DOPunchScale(0.4f * _button.transform.localScale, 0.5f, 6).OnComplete(
             ()=> {
                 wasClicked = false;
