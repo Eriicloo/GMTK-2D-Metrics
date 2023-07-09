@@ -3,14 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro.EditorUtilities;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    public static Action OnPlayerKilled;
+    
     [Header("REFERENCES")]
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private BoxCollider2D _collider;
+    [SerializeField] private SpriteRenderer _sr;
+    
+    [SerializeField] private Transform _leftGroundedRay;
+    [SerializeField] private Transform _rightGroundedRay;
     
     [Header("PARAMETERS")]
     [SerializeField] private float _jumpMultiplier;
@@ -19,7 +27,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("METRICS")]
     [SerializeField] private PlayerMetricsObject _playerMetrics;
-
 
     private float _jumpCoef = 3;
     private int _speed = 3;
@@ -31,17 +38,53 @@ public class PlayerController : MonoBehaviour
     private bool _run = false;
     private int _direction = 1;
 
+    private Vector3 dist1;
+    private Vector3 dist2;
+    
+    //Initial values
+    private Vector3 _initialPosition;
+    private bool _initialFlipX;
+    private float _initialGravity;
+
+    private void Awake()
+    {
+        _initialPosition = transform.position;
+        _initialFlipX = _sr.flipX;
+        _initialGravity = _rb.gravityScale;
+
+        dist1 = _leftGroundedRay.transform.position - transform.position;
+        dist2 = _rightGroundedRay.transform.position - transform.position;
+    }
 
     private void OnEnable()
     {
         _playerMetrics._movementSpeed.OnValueChanged += OnMovementSpeedChanged;
         _playerMetrics._jump.OnValueChanged += OnJumpChanged;
+
+        PlayLevelManager.OnPlayStart += StartPlaying;
+        PlayLevelManager.OnReset += OnLevelReset;
     }
     
     private void OnDisable()
     {
         _playerMetrics._movementSpeed.OnValueChanged -= OnMovementSpeedChanged;
         _playerMetrics._jump.OnValueChanged -= OnJumpChanged;
+            
+        PlayLevelManager.OnPlayStart -= StartPlaying;;
+        PlayLevelManager.OnReset -= OnLevelReset;
+    }
+
+    private bool IsGrounded()
+    {
+        RaycastHit2D leftHit = Physics2D.Raycast(transform.position, dist1.normalized, dist1.magnitude, LayerMask.GetMask("Default"));
+        RaycastHit2D rightHit = Physics2D.Raycast(transform.position, dist2.normalized, dist2.magnitude, LayerMask.GetMask("Default"));
+
+        if (leftHit || rightHit)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public void SetJumpCoef(int jumpCoef)
@@ -73,19 +116,6 @@ public class PlayerController : MonoBehaviour
         _health = health;
         _maxHealth = _health;
     }
-    
-    private void Update()
-    {
-        //TEST
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartPlaying();
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-    }
 
     private void FixedUpdate()
     {
@@ -106,8 +136,11 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Instruction"))
         {
-            Debug.Log(other.gameObject.GetComponent<Instruction>()._instructionType);
             SelectAction(other.gameObject.GetComponent<Instruction>()._instructionType);
+        }
+        else if (other.CompareTag("Boundries"))
+        {
+            OnPlayerKilled?.Invoke();
         }
     }
 
@@ -146,7 +179,22 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         //jump animation
-        _rb.AddForce(new Vector2(0, _jumpCoef * _jumpMultiplier), ForceMode2D.Impulse);
+        if (!IsGrounded())
+        {
+            StartCoroutine(FakeCoyoteJump());
+        } else
+        {
+            _rb.AddForce(new Vector2(0, _jumpCoef * _jumpMultiplier), ForceMode2D.Impulse);
+        }
+    }
+
+    private IEnumerator FakeCoyoteJump()
+    {
+        yield return new WaitForSeconds(0.2f);
+        if (IsGrounded())
+        {
+            _rb.AddForce(new Vector2(0, _jumpCoef * _jumpMultiplier), ForceMode2D.Impulse);
+        }
     }
 
     private void TrampolineJump()
@@ -178,8 +226,6 @@ public class PlayerController : MonoBehaviour
         //die animation
     }
 
-
-
     private void OnMovementSpeedChanged(Metric metric)
     {        
         SetSpeedCoef(metric._value);
@@ -190,4 +236,15 @@ public class PlayerController : MonoBehaviour
         SetJumpCoef(metric._value);
     }
 
+    void OnLevelReset()
+    {
+        _playing = false;
+        
+        StopRunning();
+
+        transform.position = _initialPosition;
+        _sr.flipX = _initialFlipX;
+        _rb.velocity = Vector2.zero;
+        _rb.gravityScale = _initialGravity;
+    }
 }
