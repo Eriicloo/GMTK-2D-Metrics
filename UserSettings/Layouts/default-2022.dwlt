@@ -70,8 +70,8 @@ MonoBehaviour:
     y: 0
     width: 336
     height: 633
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 45
+  controlID: 116
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 46
+  controlID: 47
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -222,7 +222,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 47
+  controlID: 48
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -362,23 +362,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 42eaffff
-      m_LastClickedID: -5566
-      m_ExpandedIDs: 86edffff30f8ffff50f8ffffe0f8fffff2f8ffff82f9ffff94f9ffffd8faffffe4faffff58760000
+      m_SelectedIDs: beafffff
+      m_LastClickedID: -20546
+      m_ExpandedIDs: 04b1ffff7eb7ffff48bdfffff4ceffff18f4ffff2af4ffffbaf4ffffccf4ffff10f6ffffa0f6ffffb2f6ffff98f7ffffb8f7ffffc4f7ffffc4770000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: GameObject
+        m_OriginalName: GameObject
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 30724
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 3}
       m_SearchString: 
@@ -423,7 +423,7 @@ MonoBehaviour:
     m_SaveData: []
     m_OverlaysVisible: 1
   m_SearchFilter:
-    m_NameFilter: level
+    m_NameFilter: level3
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -433,24 +433,24 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Project/Scripts
     m_Globs: []
-    m_OriginalText: level
+    m_OriginalText: level3
     m_ImportLogFlags: 0
     m_FilterByTypeIntersection: 0
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Project/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\ericr\OneDrive\Documentos\Projects\GitHub\GMTK_2023\GMTK-2D-Metrics
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 427d0000
-    m_LastClickedID: 32066
-    m_ExpandedIDs: 00000000427d000000ca9a3bffffff7f
+    m_SelectedIDs: a4930000
+    m_LastClickedID: 37796
+    m_ExpandedIDs: 00000000007e00004884000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -478,7 +478,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000427d0000
+    m_ExpandedIDs: 00000000007e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
