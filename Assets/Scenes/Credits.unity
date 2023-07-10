@@ -220,6 +220,10 @@ PrefabInstance:
       propertyPath: _metricsTitleText
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5023951458551196467, guid: 7696e3aeeadef2948bb4c26659d0b5e8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 5348829840391125836, guid: 7696e3aeeadef2948bb4c26659d0b5e8, type: 3}
       propertyPath: _fanMetricsObject
       value: 
