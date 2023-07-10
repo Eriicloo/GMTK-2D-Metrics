@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public static Action OnPlayerKilled;
-    
+
+    public Animator animator;
+
     [Header("REFERENCES")]
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private BoxCollider2D _collider;
@@ -147,7 +149,13 @@ public class PlayerController : MonoBehaviour
     public void StartPlaying()
     {
         _playing = true;
-        
+
+        animator.SetFloat("Speed", 0);
+        animator.SetBool("IsJumping", false);
+        animator.SetBool("IsDead", false);
+        animator.SetBool("IsRecivingDamage", false);
+        animator.SetBool("IsAttacking", false);
+
         SelectAction(_firstInstruction);
     }
 
@@ -184,25 +192,31 @@ public class PlayerController : MonoBehaviour
 
     private void Run(int direction)
     {
-        //run animation
+        animator.SetFloat("Speed", 1);
         _run = true;
         _direction = direction;
     }
 
     private void StopRunning()
     {
-        //idle animation
+        animator.SetFloat("Speed", 0);
+        animator.SetBool("IsJumping", false);
+        animator.SetBool("IsDead", false);
+        animator.SetBool("IsRecivingDamage", false);
+        animator.SetBool("IsAttacking", false);
+
         _run = false;
     }
     
     private void Jump(float jumpCoef)
     {
-        //jump animation
         if (!IsGrounded())
         {
             StartCoroutine(FakeCoyoteJump(jumpCoef));
         } else
         {
+            AudioManager.Instance.PlaySounds("Jump");
+            animator.SetBool("IsJumping", true);
             _rb.AddForce(new Vector2(0, jumpCoef * _jumpMultiplier), ForceMode2D.Impulse);
         }
     }
@@ -219,14 +233,17 @@ public class PlayerController : MonoBehaviour
 
     public void TrampolineJump(int trampolineCoef)
     {
+        AudioManager.Instance.PlaySounds("Jump");
+        animator.SetBool("IsJumping", true);
         _trampJumpCoef = JumpCoefMapping(trampolineCoef);
+        _rb.velocity = new Vector2(_rb.velocity.x, 0.0f);
         _rb.AddForce(new Vector2(0, _trampJumpCoef * _jumpMultiplier), ForceMode2D.Impulse);
         //_rb.AddForce(new Vector2(0, GameStats.trampolineJumpCoef * _jumpMultiplier), ForceMode2D.Impulse);
     }
 
     private void Attack()
     {
-        //attack animation
+        animator.SetBool("IsAttacking", true);
     }
 
     private void Heal(int healing)
@@ -238,14 +255,14 @@ public class PlayerController : MonoBehaviour
 
     private void TakeDamage(int damageTaken)
     {
-        //damage animation
+        animator.SetBool("IsRecivingDamage", true);
         _health -= damageTaken;
         _health = Mathf.Clamp(_health, 0, _maxHealth);
     }
     
     private void Die()
     {
-        //die animation
+        animator.SetBool("IsDead", true);
     }
 
     private void OnMovementSpeedChanged(Metric metric)

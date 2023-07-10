@@ -31,11 +31,11 @@ public class Fan : MonoBehaviour
         if (_fanForce == 0){
             _fanForce = 0;
         } else if (_fanForce == 1) {
-            _fanForce = 50;
+            _fanForce = 60;
         } else if (_fanForce == 2) {
-            _fanForce = 58;
+            _fanForce = 68;
         } else if (_fanForce == 3) {
-            _fanForce = 72;
+            _fanForce = 82;
         }
 
         _areaEffector2D.forceMagnitude = _fanForce;
