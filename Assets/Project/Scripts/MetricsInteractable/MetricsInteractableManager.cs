@@ -78,6 +78,12 @@ public class MetricsInteractableManager : MonoBehaviour
         HideOptionsCanvas();
     }
 
+    private IEnumerator Start()
+    {
+        yield return null;
+        OnPointsReset?.Invoke();
+    }
+
     private void OnEnable()
     {
         PlayLevelManager.OnPlayStart += DisableMetricsEditMode;
@@ -125,6 +131,9 @@ public class MetricsInteractableManager : MonoBehaviour
         }
 
         PointstextStopFloat();
+
+
+        OnPointsReset?.Invoke();
     }
 
 
