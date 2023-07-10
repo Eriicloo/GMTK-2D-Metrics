@@ -325,6 +325,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6863369389291279327, guid: 96cc23a00c7cd9142ac38e0014783e58, type: 3}
+      propertyPath: sounds.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863369389291279327, guid: 96cc23a00c7cd9142ac38e0014783e58, type: 3}
       propertyPath: music.Array.data[0].clip
       value: 
       objectReference: {fileID: 8300000, guid: f4b32d54d3947784689d88e8e6de2da8, type: 3}
@@ -339,6 +343,14 @@ PrefabInstance:
     - target: {fileID: 6863369389291279327, guid: 96cc23a00c7cd9142ac38e0014783e58, type: 3}
       propertyPath: music.Array.data[1].name
       value: LevelsMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863369389291279327, guid: 96cc23a00c7cd9142ac38e0014783e58, type: 3}
+      propertyPath: sounds.Array.data[8].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 496252df816ef294f91655b54da9feac, type: 3}
+    - target: {fileID: 6863369389291279327, guid: 96cc23a00c7cd9142ac38e0014783e58, type: 3}
+      propertyPath: sounds.Array.data[8].name
+      value: ClickTutorial
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -39,6 +39,8 @@ public class ClickTutorialHelper : MonoBehaviour
 
     private void Hide()
     {
+        AudioManager.Instance.PlaySounds("ClickTutorial");
+
         if (_wasUsed) return;
 
         
