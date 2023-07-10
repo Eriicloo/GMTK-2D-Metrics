@@ -52,6 +52,7 @@ public class Metric : MonoBehaviour
     public void Init(MetricsInteractableManager metricsInteractableManager)
     {
         _metricsInteractableManager = metricsInteractableManager;
+        _metricsInteractableManager.AddMetric(this);
 
         _nameText.text = _name;
         _incrementButton.onClick.AddListener(OnIncrementButtonPressed);
@@ -60,7 +61,7 @@ public class Metric : MonoBehaviour
         ResetValue();
     }
 
-    private void ResetValue()
+    public void ResetValue()
     {
         _value = _defaultValue;
 
