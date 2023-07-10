@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerAnimations : MonoBehaviour
 {
     [SerializeField] PlayerController playerController;
-    public void OnDeadAnimationFinish()
+
+    public void FinishDeadAnimation()
     {
         playerController.OnDeadAnimationFinish();
     }
