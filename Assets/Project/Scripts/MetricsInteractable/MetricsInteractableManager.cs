@@ -15,6 +15,9 @@ public class MetricsInteractableManager : MonoBehaviour
     [SerializeField] public Color _defaultInteractableOutline = Color.cyan;
     [SerializeField] public Color _activeInteractableOutline = Color.yellow;
 
+    private List<Metric> _metrics;
+
+
     private MetricsInteractable _currentActiveInteractable;
     private MetricsInteractable _activeInteractableBeforePlay;
 
@@ -44,12 +47,15 @@ public class MetricsInteractableManager : MonoBehaviour
     public static Action OnPointsReset;
 
 
-    private void Awake()
+    private void Start()
     {
+        _metrics = new List<Metric>();
+
         foreach (var interactable in interactables)
         {
             interactable.Init(this);                      
         }
+        ResetMetrics();
 
         _isInSubMenu = false;
 
@@ -78,11 +84,6 @@ public class MetricsInteractableManager : MonoBehaviour
         HideOptionsCanvas();
     }
 
-    private IEnumerator Start()
-    {
-        yield return null;
-        OnPointsReset?.Invoke();
-    }
 
     private void OnEnable()
     {
@@ -95,6 +96,18 @@ public class MetricsInteractableManager : MonoBehaviour
         PlayLevelManager.OnReset -= EnableMetricsEditMode;
     }
 
+    public void AddMetric(Metric metric)
+    {
+        _metrics.Add(metric);
+    }
+
+    private void ResetMetrics()
+    {
+        for (int i = 0; i < _metrics.Count; ++i)
+        {
+            _metrics[i].ResetValue();
+        }
+    }
 
     public bool CanDisplay()
     {
@@ -287,6 +300,8 @@ public class MetricsInteractableManager : MonoBehaviour
     {
         OnPointsReset?.Invoke();
 
+        ResetMetrics();
+
         _currentPoints = _maxPoints;
         UpdatePointsText();
 
@@ -294,6 +309,7 @@ public class MetricsInteractableManager : MonoBehaviour
 
         _resetPointsButton.transform.rotation = Quaternion.identity;
         _resetPointsButton.transform.DORotate(transform.rotation.eulerAngles + (Vector3.forward * -180.0f), 0.4f);
+
     }
 
 
