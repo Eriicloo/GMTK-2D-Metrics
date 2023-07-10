@@ -44,7 +44,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -390,6 +390,12 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: RestartPoints
     clip: {fileID: 8300000, guid: 000239ae961584d429890dc460e51bf9, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: CantPress
+    clip: {fileID: 8300000, guid: d065311fc3ec49344aa1f5ad2788bb5d, type: 3}
     volume: 0
     pitch: 0
     loop: 0

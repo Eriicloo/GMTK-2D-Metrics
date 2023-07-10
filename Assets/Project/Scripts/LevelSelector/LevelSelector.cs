@@ -53,7 +53,7 @@ public class LevelSelector : MonoBehaviour
     {
         AudioManager.Instance.PlaySounds("PressButton");
         playerAnimator.SetFloat("Speed", 0);
-        enemyAnimator.SetBool("IsAttacking", true);
+        enemyAnimator.SetBool("IsAttacking", false);
         SceneManager.LoadScene("MainMenu");
     }
 
