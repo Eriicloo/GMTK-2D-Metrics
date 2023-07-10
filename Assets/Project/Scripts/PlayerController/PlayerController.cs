@@ -167,7 +167,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (other.CompareTag("Boundries"))
         {
-            OnPlayerKilled?.Invoke();
+            Die();
         }
     }
 
@@ -263,6 +263,7 @@ public class PlayerController : MonoBehaviour
     private void Die()
     {
         animator.SetBool("IsDead", true);
+        _rb.gravityScale = 0;
     }
 
     private void OnMovementSpeedChanged(Metric metric)
@@ -285,5 +286,11 @@ public class PlayerController : MonoBehaviour
         _sr.flipX = _initialFlipX;
         _rb.velocity = Vector2.zero;
         _rb.gravityScale = _initialGravity;
+    }
+
+    public void OnDeadAnimationFinish() 
+    {
+        OnPlayerKilled?.Invoke();
+        animator.SetBool("IsDead", false);
     }
 }
