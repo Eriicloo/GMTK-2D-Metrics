@@ -1,6 +1,4 @@
 using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -72,4 +70,18 @@ public class SmartButton : MonoBehaviour
             );
     }
 
+    public void PlayStartSound()
+    {
+        AudioManager.Instance.PlaySounds("Start");
+    }
+
+    public void PlayPauseSound()
+    {
+        AudioManager.Instance.PlaySounds("Pause");
+    }
+
+    public void PlayResetSound()
+    {
+        AudioManager.Instance.PlaySounds("RestartPoints");
+    }
 }

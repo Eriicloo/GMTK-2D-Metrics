@@ -3,31 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class Credits : MonoBehaviour
 {
     public Animator playerAnimator;
     public Animator enemyAnimator;
 
     private void Start()
     {
+        playerAnimator.SetBool("IsAttacking", true);
+
         if (!AudioManager.Instance.isPlayingMainMenuMusic)
         {
             AudioManager.Instance.PlayMusic("MainMenu");
         }
     }
-    public void PlayGame()
+
+    public void Back()
     {
         AudioManager.Instance.PlaySounds("PressButton");
-        SceneManager.LoadScene("LevelSelector");
-    }
-
-    public void Credits()
-    {
-
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
+        playerAnimator.SetFloat("Speed", 0);
+        enemyAnimator.SetBool("IsAttacking", false);
+        SceneManager.LoadScene("MainMenu");
     }
 }

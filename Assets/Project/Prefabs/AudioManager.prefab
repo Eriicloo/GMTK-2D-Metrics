@@ -44,9 +44,9 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -288,7 +288,7 @@ Transform:
   - {fileID: 5565534077127927662}
   - {fileID: 3663913942552152307}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6863369389291279327
 MonoBehaviour:
@@ -302,7 +302,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ef1f6ede28aea458956e9ace08bc4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  music: []
+  music:
+  - name: MainMenu
+    clip: {fileID: 8300000, guid: f4b32d54d3947784689d88e8e6de2da8, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: LevelsMusic
+    clip: {fileID: 8300000, guid: 0cd673da275b0ea499d18f3f4bd60e48, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
   sounds:
   - name: Collectible
     clip: {fileID: 8300000, guid: 95d045ecddccbf44e85c4b3d819e599d, type: 3}
@@ -352,6 +364,43 @@ MonoBehaviour:
     pitch: 0
     loop: 0
     source: {fileID: 0}
+  - name: ClickTutorial
+    clip: {fileID: 8300000, guid: 496252df816ef294f91655b54da9feac, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: PressButton
+    clip: {fileID: 8300000, guid: 3372182d6b9e910499f33936efe7e34f, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Start
+    clip: {fileID: 8300000, guid: b5269b42343fcfa44b220d02ee951f37, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Pause
+    clip: {fileID: 8300000, guid: 2d81aa9e83afa2f4b96e2372ba761091, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: RestartPoints
+    clip: {fileID: 8300000, guid: 000239ae961584d429890dc460e51bf9, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: CantPress
+    clip: {fileID: 8300000, guid: d065311fc3ec49344aa1f5ad2788bb5d, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
   isPlayingMainMenuMusic: 0
+  isPlayingLevelsMusic: 0
   musicSource: {fileID: 3743442274496303607}
   soundsSource: {fileID: 7556672895661257989}
