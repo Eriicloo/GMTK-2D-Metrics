@@ -167,7 +167,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (other.CompareTag("Boundries"))
         {
-            OnPlayerKilled?.Invoke();
+            Die();
         }
     }
 
@@ -201,7 +201,6 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetFloat("Speed", 0);
         animator.SetBool("IsJumping", false);
-        animator.SetBool("IsDead", false);
         animator.SetBool("IsRecivingDamage", false);
         animator.SetBool("IsAttacking", false);
 
@@ -262,7 +261,13 @@ public class PlayerController : MonoBehaviour
     
     private void Die()
     {
+        StopRunning();
+
+        _rb.gravityScale = 0;
+        _rb.velocity = Vector2.zero;
+
         animator.SetBool("IsDead", true);
+        AudioManager.Instance.PlaySounds("Lose");
     }
 
     private void OnMovementSpeedChanged(Metric metric)
@@ -285,5 +290,11 @@ public class PlayerController : MonoBehaviour
         _sr.flipX = _initialFlipX;
         _rb.velocity = Vector2.zero;
         _rb.gravityScale = _initialGravity;
+    }
+
+    public void OnDeadAnimationFinish() 
+    {
+        animator.SetBool("IsDead", false);
+        OnPlayerKilled?.Invoke();
     }
 }
