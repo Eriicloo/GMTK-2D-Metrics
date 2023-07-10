@@ -68,10 +68,11 @@ public class LevelButton : MonoBehaviour
     {
         if (_isLocked)
         {
-
+            AudioManager.Instance.PlaySounds("CantPress");
         }
         else
         {
+            AudioManager.Instance.PlaySounds("PressButton");
             OnClickedToPlayLevel?.Invoke(this);
         }
     }
