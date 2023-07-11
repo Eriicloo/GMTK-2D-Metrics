@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public static Action OnPlayerKilled;
 
     public Animator animator;
+    public Collectible collectible;
 
     [Header("REFERENCES")]
     [SerializeField] private Rigidbody2D _rb;
@@ -285,6 +286,7 @@ public class PlayerController : MonoBehaviour
         _playing = false;
         
         StopRunning();
+        collectible.ResetCollectible();
 
         transform.position = _initialPosition;
         _sr.flipX = _initialFlipX;
@@ -296,5 +298,6 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("IsDead", false);
         OnPlayerKilled?.Invoke();
+        collectible.ResetCollectible();
     }
 }

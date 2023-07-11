@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _wasCollected: 0
+  _floatingItem: {fileID: 3572037419163627452}
   animator: {fileID: 2704175950931578164}
 --- !u!95 &2704175950931578164
 Animator:

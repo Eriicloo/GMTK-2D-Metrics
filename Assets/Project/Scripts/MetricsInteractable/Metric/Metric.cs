@@ -119,6 +119,8 @@ public class Metric : MonoBehaviour
 
     public void Increment()
     {
+        AudioManager.Instance.PlaySounds("AssignPoints");
+
         if (!CanDecrement())
         {
             ShowButton(_decrementButton, _minText);
@@ -150,6 +152,8 @@ public class Metric : MonoBehaviour
 
     public void Decrement()
     {
+        AudioManager.Instance.PlaySounds("AssignPoints");
+
         if (!CanIncrement())
         {
             ShowButton(_incrementButton, _maxText);
@@ -194,6 +198,7 @@ public class Metric : MonoBehaviour
 
     private void CanNotUseButtonAnimation(Button button)
     {
+        AudioManager.Instance.PlaySounds("NoMorePoints");
         float duration = 0.5f;
 
         button.transform.DOComplete();
@@ -236,4 +241,8 @@ public class Metric : MonoBehaviour
         }
     }
 
+    public void PlayCloseSound()
+    {
+        AudioManager.Instance.PlaySounds("ClickOff");
+    }
 }

@@ -58,12 +58,14 @@ public class MetricsInteractable : MonoBehaviour
         {
             if (!_isDisplaying)
             {
+                AudioManager.Instance.PlaySounds("Click");
                 _manager.DisplayMetricsInteractable(this);
 
                 OnMetricsDisplayClicked?.Invoke();
             }
             else
             {
+                AudioManager.Instance.PlaySounds("ClickOff");
                 _manager.HideCurrentInteractableMetrics();
             }
         }
