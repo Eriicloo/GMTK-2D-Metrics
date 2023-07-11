@@ -3103,6 +3103,10 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 1951343165}
+    - target: {fileID: 4806667081837765607, guid: 2b6c2a79081368f44b015c23a9fd6478, type: 3}
+      propertyPath: collectible
+      value: 
+      objectReference: {fileID: 1307439467}
     - target: {fileID: 6174335844699842835, guid: 2b6c2a79081368f44b015c23a9fd6478, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

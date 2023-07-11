@@ -364,14 +364,32 @@ MonoBehaviour:
     pitch: 0
     loop: 0
     source: {fileID: 0}
+  - name: Click
+    clip: {fileID: 8300000, guid: 484b54aae42f0b2408b01bb7a59637a8, type: 3}
+    volume: 0
+    pitch: 0.1
+    loop: 1
+    source: {fileID: 0}
+  - name: ClickOff
+    clip: {fileID: 8300000, guid: 10043c7ee006d104f87a0ecca4bd16fb, type: 3}
+    volume: 0
+    pitch: 0.1
+    loop: 0
+    source: {fileID: 0}
   - name: ClickTutorial
-    clip: {fileID: 8300000, guid: 496252df816ef294f91655b54da9feac, type: 3}
+    clip: {fileID: 8300000, guid: 484b54aae42f0b2408b01bb7a59637a8, type: 3}
     volume: 0
     pitch: 0
     loop: 0
     source: {fileID: 0}
   - name: PressButton
     clip: {fileID: 8300000, guid: 3372182d6b9e910499f33936efe7e34f, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: CantPress
+    clip: {fileID: 8300000, guid: d065311fc3ec49344aa1f5ad2788bb5d, type: 3}
     volume: 0
     pitch: 0
     loop: 0
@@ -394,8 +412,14 @@ MonoBehaviour:
     pitch: 0
     loop: 0
     source: {fileID: 0}
-  - name: CantPress
-    clip: {fileID: 8300000, guid: d065311fc3ec49344aa1f5ad2788bb5d, type: 3}
+  - name: NoMorePoints
+    clip: {fileID: 8300000, guid: 8300d165ed6376b4db316fc2fbe0fbfe, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: AssignPoints
+    clip: {fileID: 8300000, guid: 496252df816ef294f91655b54da9feac, type: 3}
     volume: 0
     pitch: 0
     loop: 0

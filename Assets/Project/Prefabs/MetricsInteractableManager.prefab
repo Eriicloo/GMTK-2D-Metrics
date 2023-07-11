@@ -491,7 +491,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3788221339035183726}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 299944838807988629}
+        m_TargetAssemblyTypeName: SmartButton, Assembly-CSharp
+        m_MethodName: PlayResetSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &299944838807988629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3746,7 +3758,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6296367422813739223}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1273144845742319948}
+        m_TargetAssemblyTypeName: SmartButton, Assembly-CSharp
+        m_MethodName: PlayResetSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1273144845742319948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4019,7 +4043,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5294587785702940156}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8298606844784047455}
+        m_TargetAssemblyTypeName: SmartButton, Assembly-CSharp
+        m_MethodName: PlayStartSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8298606844784047455
 MonoBehaviour:
   m_ObjectHideFlags: 0

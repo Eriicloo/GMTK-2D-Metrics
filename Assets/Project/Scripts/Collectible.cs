@@ -8,11 +8,13 @@ public class Collectible : MonoBehaviour
 {
     [HideInInspector] public bool _wasCollected;
 
+    [SerializeField] private FloatingItem _floatingItem;
     public Animator animator;
 
     private void Awake()
     {
         _wasCollected = false;
+        _floatingItem.StartFloating();
     }
 
     private void OnEnable()
@@ -38,9 +40,10 @@ public class Collectible : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    void ResetCollectible()
+    public void ResetCollectible()
     {
         gameObject.SetActive(true);
+        animator.SetBool("IsPicked", false);
         _wasCollected = false;
     }
 }

@@ -886,6 +886,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c67ac1cd961bffa40ab48f8a5886ccee, type: 3}
+--- !u!114 &678257763 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6922264690299488462, guid: c67ac1cd961bffa40ab48f8a5886ccee, type: 3}
+  m_PrefabInstance: {fileID: 678257762}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52ad46bf2597c9042bb148b306ce76d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &689745559
 GameObject:
   m_ObjectHideFlags: 0
@@ -1915,6 +1926,10 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 1250870152}
+    - target: {fileID: 4806667081837765607, guid: 2b6c2a79081368f44b015c23a9fd6478, type: 3}
+      propertyPath: collectible
+      value: 
+      objectReference: {fileID: 678257763}
     - target: {fileID: 6174335844699842835, guid: 2b6c2a79081368f44b015c23a9fd6478, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
